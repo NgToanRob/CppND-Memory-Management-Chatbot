@@ -141,6 +141,10 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// EOF STUDENT CODE
 }
 
+ChatLogic * ChatBotPanelDialog::GetChatLogicHandle() { 
+    return (_chatLogic.get()); 
+}
+
 void ChatBotPanelDialog::AddDialogItem(wxString text, bool isFromUser)
 {
     // add a single dialog element to the sizer

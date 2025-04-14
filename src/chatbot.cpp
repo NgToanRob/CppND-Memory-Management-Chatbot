@@ -38,7 +38,7 @@ ChatBot::~ChatBot()
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
-        _image = NULL;
+        // _image = NULL;
     }
 }
 
@@ -48,8 +48,9 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot& other) {
     _image = new wxBitmap(*other._image);
     _currentNode = other._currentNode;
-    _rootNode = other._rootNode; 
+    _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 // 3. Copy Assignment Operator
@@ -67,23 +68,34 @@ ChatBot &ChatBot::operator=(const ChatBot& other) {
 // 4. Move Constructor
 ChatBot::ChatBot(ChatBot&& other) noexcept {
     _image = other._image;
-    other._image = nullptr;
     _currentNode = other._currentNode;
-    _rootNode = other._rootNode; 
+    _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+
+    other._image = nullptr;
+    other._chatLogic = nullptr;
+    other._rootNode = nullptr;
+    other._currentNode = nullptr;
+    other._image = nullptr;
 }
 
 // 5. Move Assignment operator
 ChatBot &ChatBot::operator=(ChatBot&& other) noexcept  {
     if (this == &other) 
         return *this;
-    delete _image;
+    
     
     _image = other._image;
-    other._image = nullptr;
     _currentNode = other._currentNode;
-    _rootNode = other._rootNode; 
+    _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+
+    other._image = nullptr;
+    other._chatLogic = nullptr;
+    other._rootNode = nullptr;
+    other._currentNode = nullptr;
     return *this;
 }
 ////
