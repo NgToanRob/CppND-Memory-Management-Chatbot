@@ -85,7 +85,7 @@ ChatBot::ChatBot(ChatBot&& other) noexcept {
 
 // 5. Move Assignment operator
 ChatBot &ChatBot::operator=(ChatBot&& other) noexcept  {
-    std::cout << "ChatBot Move Assignment Operator" << std::endl
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
     if (this == &other) 
         return *this;
     
